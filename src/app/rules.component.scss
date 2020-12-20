@@ -8,6 +8,7 @@
 // 一條規則
 .item {
   display: flex;
+  flex-wrap: wrap;
 
   // 每個欄位
   .field {
