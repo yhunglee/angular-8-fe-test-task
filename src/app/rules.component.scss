@@ -1,0 +1,79 @@
+.container {
+  border: 1px solid #ccc;
+  padding: 1rem 1.5rem 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 3px 3px #eee;
+}
+
+// 一條規則
+.item {
+  display: flex;
+
+  // 每個欄位
+  .field {
+    flex: 0 1 20%;
+    &.extra-space {
+      flex-grow: 2;
+    }
+  }
+
+  .field > *,
+  .field {
+    padding: 0.5rem;
+    border-radius: 5px;
+  }
+
+  .field > *:first-child {
+    border: 2px solid #ccc;
+    width: -webkit-fill-available;
+  }
+  .field > input {
+    border-radius: 5px;
+  }
+
+  // 刪除規則按鈕
+  .action.remove {
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    margin: 12px 0;
+    padding: 0.3rem;
+    height: 1rem;
+
+    &:hover {
+      cursor: pointer;
+      color: #f00;
+      border-color: #f00;
+    }
+  }
+
+  // 客製化規則的異常提示
+  .invalid-feedback {
+    background-color: rgba(241, 80, 134, 0.2);
+    color: rgb(150, 0, 0);
+    visibility: hidden;
+  }
+  .show-hint {
+    visibility: visible;
+  }
+}
+
+// 第二條規則之後，跟上一條規則產生間距
+.item ~ .item {
+  margin-top: 1rem;
+}
+
+.actions {
+  padding-top: 1rem;
+  padding-left: 0.5rem;
+}
+.action.add {
+  border: 1px solid #888;
+  border-radius: 5px;
+  padding: 1rem;
+  background-color: #fff;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #ccc;
+  }
+}

@@ -1,0 +1,63 @@
+<div class="container">
+  <form [formGroup]="rulesForm">
+    <h2 class="title">{{ header }}</h2>
+    <div class="description">{{ description }}</div>
+    <div class="rules" formArrayName="collection">
+      <div
+        class="item"
+        *ngFor="let rule of formRuleCollection.controls; let i = index"
+        [formGroupName]="i"
+      >
+        <div class="field">
+          <select
+            class="page-category"
+            formControlName="category"
+            (change)="onChangeCategory($event, rule.get('url'))"
+          >
+            <option [value]="'all'">All pages</option>
+            <option [value]="'home'">Home page</option>
+            <option [value]="'product'">Product pages</option>
+            <option [value]="'password'">Password page</option>
+            <option [value]="'custom'">Custom</option>
+          </select>
+        </div>
+        <div class="field" *ngIf="rule.get('category').value === 'custom'">
+          <select class="match-logic" formControlName="match-type">
+            <option [value]="'contains'">Contains</option>
+            <option [value]="'exact'">Exact match</option>
+          </select>
+        </div>
+        <div
+          class="field extra-space"
+          *ngIf="rule.get('category').value === 'custom'"
+        >
+          <input
+            type="text"
+            class="keyword"
+            placeholder="Type a full or partial URL"
+            formControlName="url"
+          />
+          <div
+            class="invalid-feedback"
+            [ngClass]="{
+              'show-hint':
+                rule.get('category').value === 'custom' &&
+                rule.get('url').errors &&
+                (rule.get('url').touched || rule.get('url').dirty)
+            }"
+          >
+            &#10007; URL is missing
+          </div>
+        </div>
+
+        <div class="action remove" (click)="onDeleteOneRule(i)">X</div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="action add" type="button" (click)="onAddOneRule()">
+        + NEW RULE
+      </button>
+    </div>
+  </form>
+</div>
